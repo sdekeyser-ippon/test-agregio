@@ -15,6 +15,7 @@ import java.util.Set;
 
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.verify;
+import static test.edf.agregio.marche.domain.Reserve.PRIMAIRE;
 import static test.edf.agregio.marche.domain.Reserve.RAPIDE;
 import static test.edf.agregio.parc.domain.TypeParc.SOLAIRE;
 
@@ -37,5 +38,12 @@ public class OffreApplicationServiceTest {
         offreApplicationService.save(offre);
 
         verify(offreRepository).save(offre);
+    }
+
+    @Test
+    public void shouldFindOffre() {
+        offreApplicationService.find(PRIMAIRE);
+
+        verify(offreRepository).find(PRIMAIRE);
     }
 }
