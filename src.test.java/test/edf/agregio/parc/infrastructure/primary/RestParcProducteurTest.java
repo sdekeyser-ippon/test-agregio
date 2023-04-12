@@ -23,7 +23,7 @@ public class RestParcProducteurTest {
     }
 
     @Test
-    public void shouldConvertToParcProducteur() {
+    public void shouldMapToParcProducteur() {
         UUID uuid = randomUUID();
         int production = 40;
         var restParc = new RestParcProducteur(uuid, EOLIEN, production);

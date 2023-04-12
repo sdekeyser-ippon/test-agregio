@@ -23,6 +23,10 @@ public class ParcEntity {
         return parcEntity;
     }
 
+    public ParcProducteur toParcProducteur() {
+        return new ParcProducteur(getUuid(), getTypeParc(), getProduction());
+    }
+
     public UUID getUuid() {
         return uuid;
     }
@@ -45,9 +49,5 @@ public class ParcEntity {
 
     public void setProduction(int production) {
         this.production = production;
-    }
-
-    public ParcProducteur toParcProducteur() {
-        return new ParcProducteur(getUuid(), getTypeParc(), getProduction());
     }
 }

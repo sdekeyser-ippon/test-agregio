@@ -19,14 +19,11 @@ public class ParcEntityTest {
         int production = 40;
         var parcProducteur = new ParcProducteur(uuid, EOLIEN, production);
         ParcEntity parcEntity = from(parcProducteur);
-        assertThat(parcEntity).isNotNull();
-        assertThat(parcEntity.getUuid()).isEqualTo(uuid);
-        assertThat(parcEntity.getTypeParc()).isEqualTo(EOLIEN);
-        assertThat(parcEntity.getProduction()).isEqualTo(production);
+        assertThat(parcEntity).usingRecursiveComparison().isEqualTo(parcProducteur);
     }
 
     @Test
-    public void shouldConvertToParcProducteur() {
+    public void shouldMapToParcProducteur() {
         UUID uuid = randomUUID();
         int production = 40;
         var parcEntity = new ParcEntity();
@@ -34,7 +31,7 @@ public class ParcEntityTest {
         parcEntity.setProduction(production);
         parcEntity.setTypeParc(HYDRAULIQUE);
         ParcProducteur parcProducteur = parcEntity.toParcProducteur();
-        assertThat(parcProducteur).usingRecursiveComparison().comparingOnlyFields().isEqualTo(parcEntity);
+        assertThat(parcProducteur).usingRecursiveComparison().isEqualTo(parcEntity);
     }
 
 }
