@@ -1,6 +1,8 @@
 package test.edf.agregio.offre.domain;
 
+import test.edf.agregio.marche.domain.Marche;
+
 import java.util.Collection;
 
-public record Offre(test.edf.agregio.marche.domain.Marche marche, Collection<BlocHoraire> blocHoraires) {
+public record Offre(Marche marche, Collection<BlocHoraire> blocHoraires) {
 }

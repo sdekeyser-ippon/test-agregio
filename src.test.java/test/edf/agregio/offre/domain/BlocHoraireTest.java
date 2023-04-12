@@ -1,19 +1,33 @@
 package test.edf.agregio.offre.domain;
 
 import org.testng.annotations.Test;
+import test.edf.agregio.parc.domain.ParcProducteur;
+
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static test.edf.agregio.parc.domain.TypeParc.EOLIEN;
+import static test.edf.agregio.parc.domain.TypeParc.SOLAIRE;
 
 public class BlocHoraireTest {
 
     @Test
     public void shouldCreateBlocHoraire() {
-        int quantite = 10;
-        int prix = 200;
-        var blocHoraire = new BlocHoraire(quantite, prix);
+        int prix = 500;
+        Set<ParcProducteur> parcProducteurs = Set.of(new ParcProducteur(SOLAIRE, 30), new ParcProducteur(EOLIEN, 20));
+        var blocHoraire = new BlocHoraire(parcProducteurs, prix);
         assertThat(blocHoraire).isNotNull();
-        assertThat(blocHoraire.quantiteDesiree()).isEqualTo(quantite);
+        assertThat(blocHoraire.parcProducteurs()).isEqualTo(parcProducteurs);
         assertThat(blocHoraire.prixPlancher()).isEqualTo(prix);
+    }
+
+    @Test
+    public void shouldComputeQuantite() {
+        int productionSolaire = 30;
+        int productionEolien = 20;
+        Set<ParcProducteur> parcProducteurs = Set.of(new ParcProducteur(SOLAIRE, productionSolaire), new ParcProducteur(EOLIEN, productionEolien));
+        var blocHoraire = new BlocHoraire(parcProducteurs, 300);
+        assertThat(blocHoraire.quantite()).isEqualTo(productionEolien + productionSolaire);
     }
 
 }
