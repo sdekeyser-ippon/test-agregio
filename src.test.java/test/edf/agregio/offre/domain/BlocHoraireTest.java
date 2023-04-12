@@ -5,6 +5,7 @@ import test.edf.agregio.parc.domain.ParcProducteur;
 
 import java.util.Set;
 
+import static java.util.UUID.randomUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static test.edf.agregio.parc.domain.TypeParc.EOLIEN;
 import static test.edf.agregio.parc.domain.TypeParc.SOLAIRE;
@@ -14,7 +15,7 @@ public class BlocHoraireTest {
     @Test
     public void shouldCreateBlocHoraire() {
         int prix = 500;
-        Set<ParcProducteur> parcProducteurs = Set.of(new ParcProducteur(SOLAIRE, 30), new ParcProducteur(EOLIEN, 20));
+        Set<ParcProducteur> parcProducteurs = Set.of(new ParcProducteur(randomUUID(), SOLAIRE, 30), new ParcProducteur(randomUUID(), EOLIEN, 20));
         var blocHoraire = new BlocHoraire(parcProducteurs, prix);
         assertThat(blocHoraire).isNotNull();
         assertThat(blocHoraire.parcProducteurs()).isEqualTo(parcProducteurs);
@@ -25,7 +26,7 @@ public class BlocHoraireTest {
     public void shouldComputeQuantite() {
         int productionSolaire = 30;
         int productionEolien = 20;
-        Set<ParcProducteur> parcProducteurs = Set.of(new ParcProducteur(SOLAIRE, productionSolaire), new ParcProducteur(EOLIEN, productionEolien));
+        Set<ParcProducteur> parcProducteurs = Set.of(new ParcProducteur(randomUUID(), SOLAIRE, productionSolaire), new ParcProducteur(randomUUID(), EOLIEN, productionEolien));
         var blocHoraire = new BlocHoraire(parcProducteurs, 300);
         assertThat(blocHoraire.quantite()).isEqualTo(productionEolien + productionSolaire);
     }

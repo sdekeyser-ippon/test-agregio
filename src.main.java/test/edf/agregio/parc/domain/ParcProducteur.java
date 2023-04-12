@@ -1,4 +1,6 @@
 package test.edf.agregio.parc.domain;
 
-public record ParcProducteur(TypeParc typeParc, int production) {
+import java.util.UUID;
+
+public record ParcProducteur(UUID uuid, TypeParc typeParc, int production) {
 }
